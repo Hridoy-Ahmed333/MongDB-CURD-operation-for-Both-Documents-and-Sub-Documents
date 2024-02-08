@@ -245,6 +245,8 @@ exports.deleteComment = async (req, res) => {
   }
 };
 
+exports.deleteComment = async (req, res) => {};
+
 //Sub document or array methode example
 
 /*
