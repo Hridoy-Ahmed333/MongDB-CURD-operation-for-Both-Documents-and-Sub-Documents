@@ -244,3 +244,73 @@ exports.deleteComment = async (req, res) => {
       .send({ message: error.message || "Error deleting comment." });
   }
 };
+
+//Sub document or array methode example
+
+/*
+const Product = mongoose.model("Product", productSchema);
+let product = await Product.findById(someProductId);
+
+// $pop() - Removes the first or last element from an array
+product.comments.$pop(); // Removes the last comment
+product.comments.$pop(-1); // Removes the last comment
+product.comments.$pop(1); // Removes the first comment
+
+// $shift() - Removes the first element from an array
+product.comments.$shift(); // Removes the first comment
+
+// addToSet() - Adds a value to an array unless the value is already present
+product.comments.addToSet({ text: 'New comment', author: 'New Author' });
+
+// includes() - Checks if an array contains a certain value
+const hasComment = product.comments.includes({ text: 'New comment', author: 'New Author' });
+
+// indexOf() - Finds the index of the first occurrence of a specified value in an array
+const commentIndex = product.comments.indexOf({ text: 'New comment', author: 'New Author' });
+
+// nonAtomicPush() - Pushes an item onto an array without saving the document
+product.comments.nonAtomicPush({ text: 'Another comment', author: 'Another Author' });
+
+// pop() - Removes the last element from an array and returns that element
+const lastComment = product.comments.pop();
+
+// pull() - Removes all instances of a value from an array
+product.comments.pull({ text: 'Specific comment to remove', author: 'Author of the comment' });
+
+// push() - Appends an item to an array and returns the new length of the array
+product.comments.push({ text: 'Yet another comment', author: 'Yet Another Author' });
+
+// remove() - Alias for pull(). Removes all instances of a value from an array
+product.comments.remove({ text: 'Remove all comments by this author', author: 'Author to remove' });
+
+// set() - Replaces the contents of an array with a new array or value
+product.comments.set([{ text: 'Only this comment should remain', author: 'Author of the remaining comment' }]);
+
+// shift() - Removes the first element from an array and returns that removed element
+const firstComment = product.comments.shift();
+
+// sort() - Sorts the elements of an array in place and returns the array
+product.comments.sort((a, b) => a.text.localeCompare(b.text));
+
+// splice() - Changes the content of an array by removing or replacing existing elements and/or adding new elements in place
+product.comments.splice(1,  1, { text: 'Replaced comment', author: 'Author of the replaced comment' });
+
+// toObject() - Converts the MongooseArray to a plain JavaScript array
+const commentsObject = product.comments.toObject();
+
+// unshift() - Adds one or more elements to the beginning of an array and returns the new length of the array
+product.comments.unshift({ text: 'First comment now', author: 'Author of the first comment' });
+
+// After performing operations, remember to save the document to persist changes to the database
+await product.save();
+
+//Updating a field in the comment
+
+const updatedFieldData = { text: 'Updated comment text' }; // The fields you want to update
+// Use the $set operator to update the specific fields of the comment with the given ID
+await Product.updateOne(
+  { '_id': product._id, 'comments._id': commentIdToUpdate },
+  { '$set': { 'comments.$.text': updatedFieldData.text } }
+);
+
+*/
